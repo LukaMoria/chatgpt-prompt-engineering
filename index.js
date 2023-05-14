@@ -1,6 +1,6 @@
 const { Configuration, OpenAIApi } = require("openai");
 require('dotenv').config();
-const { checkStudentSolutionPrompt } = require('./prompts')
+const { prompt } = require('./lessons/transforming')
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY
@@ -16,9 +16,9 @@ const getCompletion = async(prompt, model="gpt-3.5-turbo") => {
     temperature: 0
   })
 
-  console.log(completion.data.choices[0].message)
+  console.log(completion.data.choices[0].message.content)
 
-  return completion.data.choices[0].message
+  return completion.data.choices[0].message.content
 }
 
-getCompletion(checkStudentSolutionPrompt)
+getCompletion(prompt)
